@@ -9,8 +9,19 @@
 #define DEFAULT_STRING_LENGTH 20
 #define PRINT_COMMANDS 0
 
+int couldAllocString(char* string) {
+    if (string == NULL) {
+        fprintf(stderr, "ERROR: COULDN'T ALLOCATE MEMORY.\n");
+        return 0;
+    }
+    return 1;
+}
+
 char* scan_string() {
     char* string = (char*)malloc(DEFAULT_STRING_LENGTH);
+    if (couldAllocString(string) == 0) {
+        return NULL;
+    }
     char character = ' ';
     int name_len = DEFAULT_STRING_LENGTH, j = 0;
     while (character == ' ' || character == '\n') {
@@ -103,9 +114,15 @@ int main() {
             int index;
             scanf("%d", &index);
             char* string = scan_string();
-            StrList_insertAt(list, string, index);
-            if (PRINT_COMMANDS == 1) {
-                printf("Inserted '%s' to index %d.\n", string, index);
+            if (list == NULL && index == 0) { // can insert into index 0 even if no list
+                list = StrList_alloc();
+                StrList_insertLast(list, string);
+            }
+            else {
+                StrList_insertAt(list, string, index);
+                if (PRINT_COMMANDS == 1) {
+                    printf("Inserted '%s' to index %d.\n", string, index);
+                }
             }
             free(string); // frees scanned string memory
 

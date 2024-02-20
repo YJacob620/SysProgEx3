@@ -7,6 +7,7 @@
 #endif
 
 #include <string.h>
+#define PRINT_COMMANDS2 0
 
 ////////////////////////// Auxilary Functions ////////////////////////////////
 
@@ -87,7 +88,10 @@ struct _StrList {
 */
 int __is_list_valid(const StrList* list) {
     if (list == NULL) {
-        fprintf(stderr, "ERROR: INVALID LIST.\n");
+        if (PRINT_COMMANDS2 == 1) {
+            fprintf(stderr, "ERROR: INVALID LIST.");
+        }
+        printf("\n");
         return 0;
     }
     return 1;

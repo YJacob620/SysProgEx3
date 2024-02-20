@@ -2,6 +2,7 @@
 
 #define INCLUDE_GAURD 1
 #include <stdio.h>
+#include <stdlib.h>
 #include "StrList.h"
 #endif
 

@@ -89,9 +89,9 @@ struct _StrList {
 int __is_list_valid(const StrList* list) {
     if (list == NULL) {
         if (PRINT_COMMANDS2 == 1) {
-            fprintf(stderr, "ERROR: INVALID LIST.");
+            fprintf(stderr, "ERROR: INVALID LIST\n.");
         }
-        printf("\n");
+        // printf("\n");
         return 0;
     }
     return 1;
@@ -238,6 +238,7 @@ char* StrList_firstData(const StrList* list) {
 
 void StrList_print(const StrList* list) {
     if (__is_list_valid(list) == 0) {
+        printf("\n");
         return;
     }
     Node* n = list->_head;
@@ -280,6 +281,7 @@ Node* get_Node_at(const StrList* list, int index) {
 
 void StrList_printAt(const StrList* list, int index) {
     if (is_index_valid(list, index) == 0) {
+        printf("\n");
         return;
     }
     Node* n = get_Node_at(list, index);
@@ -289,9 +291,9 @@ void StrList_printAt(const StrList* list, int index) {
 
 int StrList_printLen(const StrList* list) {
     if (__is_list_valid(list) == 0) {
-        return list->_charAmount;
+        return 0;
     }
-    return 0;
+    return list->_charAmount;
 }
 
 int StrList_count(StrList* list, const char* data) {

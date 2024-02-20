@@ -288,7 +288,10 @@ void StrList_printAt(const StrList* list, int index) {
 }
 
 int StrList_printLen(const StrList* list) {
-    return list->_charAmount;
+    if (__is_list_valid(list) == 0) {
+        return list->_charAmount;
+    }
+    return 0;
 }
 
 int StrList_count(StrList* list, const char* data) {

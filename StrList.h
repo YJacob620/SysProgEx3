@@ -13,9 +13,9 @@
  *
  ********************************************************************************/
 
- /*
-  * StrList represents a StrList data structure.
-  */
+/*
+ * StrList represents a StrList data structure.
+ */
 struct _StrList;
 typedef struct _StrList StrList;
 
@@ -39,12 +39,14 @@ size_t StrList_size(const StrList* StrList);
 /*
  * Inserts an element in the end of the StrList.
  */
-void StrList_insertLast(StrList* StrList, const char* data);
+void StrList_insertLast(StrList* StrList,
+					  const char* data);
 
 /*
 * Inserts an element at given index
 */
-void StrList_insertAt(StrList* StrList, const char* data, int index);
+void StrList_insertAt(StrList* StrList,
+	const char* data,int index);
 
 /*
  * Returns the StrList first data.
@@ -59,7 +61,7 @@ void StrList_print(const StrList* StrList);
 /*
  Prints the word at the given index to the standard output.
 */
-void StrList_printAt(const StrList* Strlist, int index);
+void StrList_printAt(const StrList* Strlist,int index);
 
 /*
  * Return the amount of chars in the list.
@@ -88,20 +90,20 @@ void StrList_removeAt(StrList* StrList, int index);
 int StrList_isEqual(const StrList* StrList1, const StrList* StrList2);
 
 /*
- * Clones the given StrList.
+ * Clones the given StrList. 
  * It's the user responsibility to free it with StrList_free.
  */
 StrList* StrList_clone(const StrList* StrList);
 
 /*
- * Reverces the given StrList.
+ * Reverces the given StrList. 
  */
-void StrList_reverse(StrList* StrList);
+void StrList_reverse( StrList* StrList);
 
 /*
- * Sort the given list in lexicographical order
+ * Sort the given list in lexicographical order 
  */
-void StrList_sort(StrList* StrList);
+void StrList_sort( StrList* StrList);
 
 /*
  * Checks if the given list is sorted in lexicographical order

@@ -12,7 +12,7 @@ char* scan_string() {
     char* string = (char*)malloc(DEFAULT_STRING_LENGTH);
     char character = ' ';
     int name_len = DEFAULT_STRING_LENGTH, j = 0;
-    while (character == ' ') {
+    while (character == ' ' || character == '\n') {
         scanf("%c", &character);
     }
     while (character != ' ' && character != '\n' && character != EOF) { // loop until done scanning name
@@ -30,36 +30,71 @@ char* scan_string() {
 }
 
 int main() {
-    printf("Program StrList initiated.\n");
+    if (PRINT_COMMANDS == 1) {
+        printf("Program StrList initiated.\n");
+    }
     char c = '?';
     StrList* list = NULL;
     while (c != '0' && c != EOF) {
         scanf("%c", &c);
+        if (c == '0') {
+            break;
+        }
         while (c == ' ') {
             scanf("%c", &c);
         }
 
-        if (c == 'A') {
-            int string_num;
-            scanf("%d", &string_num);
-            if (string_num < 1) {
-                if (PRINT_COMMANDS == 1) {
-                    printf("Invalid string number.\n");
+        if (c == '1') {
+            scanf("%c", &c);
+            if (c == ' ' || c == '\n') {
+                int string_num;
+                scanf("%d", &string_num);
+                if (string_num < 1) {
+                    printf("Invalid number of strings.\n");
+                }
+                else {
+                    StrList_free(list); // frees memory of previous list (if existed)
+                    list = StrList_alloc();
+                    int counter = 0;
+                    char* string;
+                    while (counter < string_num) {
+                        string = scan_string();
+                        StrList_insertLast(list, string);
+                        free(string); // frees scanned string memory
+                        counter++;
+                    }
+                    if (PRINT_COMMANDS == 1) {
+                        printf("List created.\n");
+                    }
                 }
             }
-            else {
-                StrList_free(list); // frees memory previous list took (if existed)
-                list = StrList_alloc();
-                int counter = 0;
-                char* string;
-                while (counter < string_num) {
-                    string = scan_string();
-                    StrList_insertLast(list, string);
-                    free(string); // frees original string memory
-                    counter++;
-                }
+            else if (c == '0') {
+                StrList_reverse(list);
                 if (PRINT_COMMANDS == 1) {
-                    printf("List created.\n");
+                    printf("Reversed list.\n");
+                }
+                c = '?';
+            }
+            else if (c == '1') {
+                StrList_free(list);
+                list = NULL;
+                if (PRINT_COMMANDS == 1) {
+                    printf("Deleted the list.\n");
+                }
+            }
+            else if (c == '2') {
+                StrList_sort(list);
+                if (PRINT_COMMANDS == 1) {
+                    printf("Sorted list.\n");
+                }
+            }
+            else if (c == '3') {
+                int sorted = StrList_isSorted(list);
+                if (sorted == 1) {
+                    printf("true\n");
+                }
+                else {
+                    printf("false\n");
                 }
             }
         }
@@ -71,7 +106,7 @@ int main() {
             if (PRINT_COMMANDS == 1) {
                 printf("Inserted '%s' to index %d.\n", string, index);
             }
-            free(string); // frees original string memory
+            free(string); // frees scanned string memory
 
         }
         else if (c == '3') {
@@ -121,36 +156,8 @@ int main() {
                 printf("Removed element in index %d from the list.\n", index);
             }
         }
-        else if (c == '1') {
-            scanf("%c", &c);
-            if (c == '0') {
-                StrList_reverse(list);
-                if (PRINT_COMMANDS == 1) {
-                    printf("Reversed list.\n");
-                }
-                c = '?';
-            }
-            else if (c == '1') {
-                StrList_free(list);
-                list = NULL;
-                if (PRINT_COMMANDS == 1) {
-                    printf("Deleted the list.\n");
-                }
-            }
-            else if (c == '2') {
-                StrList_sort(list);
-                printf("Sorted list.\n");
-            }
-            else if (c == '3') {
-                int sorted = StrList_isSorted(list);
-                if (sorted == 1) {
-                    printf("List is sorted.\n");
-                }
-                else {
-                    printf("List is NOT sorted.\n");
-                }
-            }
-        }
     }
+    free(list);
+
     return 0;
 }

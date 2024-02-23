@@ -175,7 +175,7 @@ int main() {
             }
         }
     }
-    free(list);
+    StrList_free(list);
 
     return 0;
 }

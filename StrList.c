@@ -44,13 +44,12 @@ Node* Node_alloc(char* data, Node* prev, Node* next) {
         return NULL;
     }
     p->_data = data;
-    p->_prev = prev; // MIGHT NOT WORK
-    p->_next = next; // MIGHT NOT WORK
+    p->_prev = prev;
+    p->_next = next;
     return p;
 }
 
 void Node_free(Node* node) {
-    // printf("FREE MEM\n"); // TEST
     free(node->_data);
     free(node);
 }

@@ -13,4 +13,4 @@ StrList.o: StrList.c
 
 # executables
 StrList: Main.o StrList.o
-	gcc -Wall Main.o StrList.o -o StrList
+	gcc -Wall -g Main.o StrList.o -o StrList

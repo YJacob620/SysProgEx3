@@ -65,8 +65,10 @@ int main() {
                     printf("Invalid number of strings.\n");
                 }
                 else {
-                    StrList_free(list); // frees memory of previous list (if existed)
-                    list = StrList_alloc();
+                    if (list == NULL) {
+                        StrList_free(list);
+                        list = StrList_alloc();
+                    }
                     int counter = 0;
                     char* string;
                     while (counter < string_num) {

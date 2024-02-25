@@ -66,7 +66,6 @@ int main() {
                 }
                 else {
                     if (list == NULL) {
-                        StrList_free(list);
                         list = StrList_alloc();
                     }
                     int counter = 0;
